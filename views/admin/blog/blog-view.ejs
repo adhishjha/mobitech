@@ -1,0 +1,41 @@
+<%- include('../../layout/header.ejs') %>
+
+<%- include('../../admin/admin-sidebar.ejs') %>
+
+
+<div class="col-lg-9 mb-5">
+  <div class="ps-4">
+          <div class="mb-3">
+              <h2>Blog view</h2>
+          </div>
+      <div>
+          <table class="table table-bordered">
+              <thead class="table-light">
+                  <tr>
+                      <th scope="col">#ID</th>
+                      <th scope="col">Title</th>
+                      <th scope="col">Description</th>
+                      <th scope="col">Image</th>
+                  </tr>
+              </thead>
+              <tbody>
+                      <tr>
+                          <th scope="row"><%= view._id %></th>
+                          <td><%= view.title %></td>
+                          <td><%= view.description %></td>
+                          <td><img src="<%= view.image.url %>" width="100px" alt=""></td>
+                      </tr>
+              </tbody>
+          </table>
+      </div>
+  </div>
+</div>
+</div>
+</div>
+
+
+
+
+
+
+<%- include('../../layout/footer.ejs') %>

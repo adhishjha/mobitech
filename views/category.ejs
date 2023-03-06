@@ -1,0 +1,32 @@
+<!-- header  -->
+<%- include('./layout/header.ejs') %>
+
+
+
+<!-- blogs  -->
+<div class="container mb-5">
+    <h1 class="text-decoration-underline text-center my-5"><%= cn %> BLOGS</h1>
+    <div class="row gx-lg-5 gy-5">
+
+      <% cd.forEach((categoryitem)=>{ %>
+
+        <div class="col-lg-4">
+          <div class="card">
+            <img src="<%= categoryitem.image.url %>" height="250px" class="card-img-top" alt="...">
+            <div class="card-body">
+              <h5 class="card-title"><%= categoryitem.title %></h5>
+              <p class="card-text"><%= categoryitem.description.slice(0,120) %></p>
+              <p><%= categoryitem.createdAt.toLocaleDateString() %></p>
+              <a href="/blog-detail/<%= categoryitem._id %>" class="btn btn-primary">Read More</a>
+            </div>
+          </div>
+        </div>
+
+      <% }) %>
+
+      </div>
+</div>
+
+
+<!-- footer  -->
+<%- include('./layout/footer.ejs') %>

@@ -1,0 +1,24 @@
+<!-- header  -->
+<%- include('./layout/header.ejs') %>
+
+
+<!-- about us  -->
+<div class="container-fluid px-4 mb-5">
+    <div class="row">
+        <div class="col-lg-6 order-1 order-lg-0">
+            <div>
+                <h4 class="mt-4 mb-3 text-decoration-underline">ABOUT US</h4>
+                <p class="text-justify"><%= a.about %></p>
+            </div>
+        </div>
+        <div class="col-lg-6 order-0 order-lg-1">
+            <div class="d-flex justify-content-center">
+                <img src="images/aboutus-img.webp" width="600px" class="img-fluid" alt="">
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!-- footer  -->
+<%- include('./layout/footer.ejs') %>

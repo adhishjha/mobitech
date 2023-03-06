@@ -1,0 +1,108 @@
+<%- include('../../layout/header.ejs') %>
+
+<%- include('../../admin/admin-sidebar.ejs') %>
+
+
+<div class="col-lg-9 mb-5">
+  <div class="ps-4">
+      <div class="d-flex justify-content-between mb-3">
+          <div>
+              <h2>Blog List</h2>
+          </div>
+          <div>
+              <!-- Button trigger modal -->
+              <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                  Add Blog
+              </button>
+          </div>
+      </div>
+      <div>
+          <table class="table table-bordered">
+              <thead class="table-light">
+                  <tr>
+                      <th scope="col">#ID</th>
+                      <th scope="col">Title</th>
+                      <th scope="col">Description</th>
+                      <th scope="col">Category</th>
+                      <th scope="col">Image</th>
+                      <th scope="col">Action</th>
+                  </tr>
+              </thead>
+              <tbody>
+                <%  d.forEach((item)=>{  %>
+                      <tr>
+                          <th scope="row"><%= item._id %></th>
+                          <td><%= item.title %></td>
+                          <td><%= item.description.slice(0,150) %></td>
+                          <td><%= item.category %></td>
+                          <td><img src="<%= item.image.url %>" width="50px" alt=""></td>
+                          <td class="space-x-3">
+                              <a href="/admin/blogview/<%= item._id %>" class="text-decoration-none text-black">
+                                  <i class="fa-solid fa-eye"></i>
+                              </a>
+                              <a href="/admin/blogedit/<%= item._id %>" class="text-decoration-none text-warning">
+                                  <i class="fa-solid fa-pen-to-square"></i>
+                              </a>
+                              <a href="/admin/blogdelete/<%= item._id %>" class="text-decoration-none text-danger">
+                                  <i class="fa-solid fa-trash-can"></i>
+                              </a>
+                          </td>
+                      </tr>
+               <%   })  %>
+              </tbody>
+          </table>
+      </div>
+  </div>
+</div>
+</div>
+</div>
+
+
+
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="exampleModalLabel">Add Blog</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <form action="/bloginsert" method="post" enctype="multipart/form-data">
+          <div class="mb-3">
+              <label for="">Title</label>
+              <input type="text" name="title" class="form-control">
+          </div>
+          <div class="mb-3">
+            <label for="">Category</label>
+            <select name="category" id="" class="form-select">
+                <option value="" selected disabled>Select</option>
+                <% c.forEach((item)=>{ %>
+                    <option value="<%= item.cat_name %>"><%= item.cat_name %></option>
+               <% }) %>
+            </select>
+          </div>
+          <div class="mb-3">
+              <label for="">Description</label>
+              <textarea name="description" class="form-control" id="" cols="30" rows="10"></textarea>
+          </div>
+          <div class=" mb-3">
+              <label for="">Upload image</label>
+              <input type="file" name="image" class="form-control">
+          </div>
+          <div class="d-flex justify-content-end">
+              <button type="button" class="btn btn-secondary me-2" data-bs-dismiss="modal">Close</button>
+              <button type="submit" class="btn btn-primary">Submit</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+
+
+<%- include('../../layout/footer.ejs') %>

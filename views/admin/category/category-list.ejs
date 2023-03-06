@@ -1,0 +1,82 @@
+<%- include('../../layout/header.ejs') %>
+
+<%- include('../../admin/admin-sidebar.ejs') %>
+
+
+<div class="col-lg-9 mb-5">
+  <div class="ps-4">
+      <div class="d-flex justify-content-between mb-3">
+          <div>
+              <h2>Category List</h2>
+          </div>
+          <div>
+              <!-- Button trigger modal -->
+              <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                  Add Category
+              </button>
+          </div>
+      </div>
+      <div>
+          <table class="table table-bordered">
+              <thead class="table-light">
+                  <tr>
+                      <th scope="col">#ID</th>
+                      <th scope="col">Category Name</th>
+                      <th scope="col">Action</th>
+                  </tr>
+              </thead>
+              <tbody>
+              <%  d.forEach((item)=>{ %>
+                <tr>
+                  <th scope="row"><%= item._id %></th>
+                  <td><%= item.cat_name %></td>
+                  <td class="space-x-3">
+                      <a href="/admin/categoryedit/<%= item._id %>" class="text-decoration-none text-warning">
+                          <i class="fa-solid fa-pen-to-square"></i>
+                      </a>
+                      <a href="/admin/categorydelete/<%= item._id %>" class="text-decoration-none text-danger">
+                          <i class="fa-solid fa-trash-can"></i>
+                      </a>
+                  </td>
+              </tr>
+              <%  }) %>
+              </tbody>
+          </table>
+      </div>
+  </div>
+</div>
+</div>
+</div>
+
+
+
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="exampleModalLabel">Add Category</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <form action="/categoryinsert" method="post" >
+          <div class="md-3 mb-3">
+              <label for="" class="mb-1">Category Name</label>
+              <input type="text" name="cat_name" class="form-control">
+          </div>
+          <div class="d-flex justify-content-end">
+              <button type="button" class="btn btn-secondary me-2" data-bs-dismiss="modal">Close</button>
+              <button type="submit" class="btn btn-primary">Submit</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+  
+  
+  
+  
+  
+  <%- include('../../layout/footer.ejs') %>

@@ -1,0 +1,44 @@
+<%- include('../../layout/header.ejs') %>
+
+<%- include('../../admin/admin-sidebar.ejs') %>
+
+
+<div class="col-lg-9 mb-5">
+  <div class="ps-4">
+      <div class="d-flex justify-content-between mb-3">
+          <div>
+              <h2>About</h2>
+          </div>
+      </div>
+      <div>
+          <table class="table table-bordered">
+              <thead class="table-light">
+                  <tr>
+                      <th scope="col">#ID</th>
+                      <th scope="col">About</th>
+                      <th scope="col">Action</th>
+                  </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <th scope="row"><%= a._id %></th>
+                  <td><%= a.about %></td>
+                  <td class="space-x-3">
+                      <a href="/admin/aboutedit/<%= a._id %>" class="text-decoration-none text-warning">
+                          <i class="fa-solid fa-pen-to-square"></i>
+                      </a>
+                  </td>
+              </tr>
+              </tbody>
+          </table>
+      </div>
+  </div>
+</div>
+</div>
+</div>
+
+
+
+
+
+<%- include('../../layout/footer.ejs') %>

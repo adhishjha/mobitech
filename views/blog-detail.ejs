@@ -1,0 +1,57 @@
+<%- include('./layout/header.ejs') %>
+
+
+<!-- blog detail  -->
+<div class="container my-4 my-lg-5 blog-detail">
+    <div class="row">
+        <div class="col-lg-8">
+            <div>
+                <h2><%= d.title %></h2>
+                <p>by Mobitech on <span><%= d.createdAt.toLocaleDateString() %></span></p>
+                <img src="<%= d.image.url %>" class="img-fluid" alt="">
+                <p class="mt-3"><%= d.description %></p>
+            </div>
+        </div>
+        <div class="col-lg-4">
+            <!-- recent blog  -->
+            <div>
+                <h5 class="bg-dark text-white py-2 px-3">Recent Blogs</h5>
+                <div class="row gy-1">
+                   <% r.forEach((recentitem)=>{ %>
+                    <div class="col-lg-4">
+                        <a href="/blog-detail/<%= recentitem._id %>">
+                            <img src="<%= recentitem.image.url %>" class="img-fluid" alt="">
+                        </a>
+                    </div>
+                    <div class="col-lg-8">
+                        <a href="/blog-detail/<%= recentitem._id %>" class="text-black">
+                            <h5><%= recentitem.title %></h5>
+                            <p><%= recentitem.createdAt.toLocaleDateString() %></p>
+                        </a>
+                    </div>
+                   <% }) %>
+                    
+                </div>
+            </div>
+            <!-- category  -->
+            <div class="mt-2 category">
+                <h5 class="bg-dark text-white py-2 px-3">Categories</h5>
+                <div class="row gy-3 pt-2">
+                    <% c.forEach((categoryitem)=>{ %>
+
+                            <div class="col-4">
+                                <a href="/category/<%= categoryitem.cat_name %>" class="text-decoration-none fs-5 border rounded-pill px-3 py-1 text-black bg-light"><%= categoryitem.cat_name %></a>
+                            </div>
+
+                    <% }) %>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+<%- include('./layout/footer.ejs') %>

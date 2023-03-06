@@ -1,0 +1,48 @@
+<%- include('../../layout/header.ejs') %>
+
+<%- include('../../admin/admin-sidebar.ejs') %>
+
+
+<div class="col-lg-9 mb-5">
+  <div class="ps-4">
+      <div class="d-flex justify-content-between mb-3">
+          <div>
+              <h2>Contact List</h2>
+          </div>
+      </div>
+      <div>
+          <table class="table table-bordered">
+              <thead class="table-light">
+                  <tr>
+                      <th scope="col">#ID</th>
+                      <th scope="col">Name</th>
+                      <th scope="col">Email</th>
+                      <th scope="col">Phone</th>
+                      <th scope="col">Message</th>
+                  </tr>
+              </thead>
+              <tbody>
+                <%  d.forEach((item)=>{ %>
+
+                  <tr>
+                      <th scope="row"><%= item._id %></th>
+                      <td><%= item.name %></td>
+                      <td><%= item.email %></td>
+                      <td><%= item.phone %></td>
+                      <td><%= item.message %></td>
+                  </tr>
+
+                 <% }) %>
+              </tbody>
+          </table>
+      </div>
+  </div>
+</div>
+</div>
+</div>
+
+
+
+
+
+<%- include('../../layout/footer.ejs') %>

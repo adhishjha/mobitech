@@ -1,0 +1,53 @@
+<%- include('../../layout/header.ejs') %>
+
+<%- include('../../admin/admin-sidebar.ejs') %>
+
+
+<div class="col-lg-9 mb-5">
+  <div class="ps-4">
+          <div class="mb-3">
+              <h2>Blog Edit</h2>
+          </div>
+      <div>
+          <form action="/blogupdate/<%= edit._id %>" method="post" enctype="multipart/form-data">
+              <div class="mb-3">
+                  <label for="">Title</label>
+                  <input type="text" class="form-control" name="title" value="<%= edit.title %>">
+              </div>
+              <div class="mb-3">
+                <label for="">Category</label>
+                <select name="category" id="" class="form-select">
+                    <% c.forEach((item)=>{ %>
+                        <option value="<%= item.cat_name %>"
+                            <% if(edit.category == item.cat_name){ %>
+                                <%= select %>
+                           <% } %>
+                            ><%= item.cat_name %></option>
+                   <% }) %>
+                </select>
+              </div>
+              <div class="mb-3">
+                  <label for="">Description</label>
+                  <textarea name="description" class="form-control" id="" cols="30" rows="10"><%= edit.description %></textarea>
+              </div>
+              <div class="md-3 mb-3">
+                  <label for="">Upload image</label>
+                  <input type="file" name="image" class="form-control">
+              </div>
+              <div class="mb-3">
+                  <img src="<%= edit.image.url %>" width="150px" alt="">
+              </div>
+              <button type="submit" class="btn btn-primary">Update</button>
+          </form>
+      </div>
+  </div>
+</div>
+</div>
+</div>
+
+
+
+
+
+
+<%- include('../../layout/footer.ejs') %>
