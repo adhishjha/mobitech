@@ -69,8 +69,8 @@ class AdminController{
 
                     if(ismatched){
                         //token generate
-                        const token = jwt.sign({ id: admin._id }, 'adhishpninfosyscandidate08');
-                        // console.log(token)
+                        const token = jwt.sign({ id: admin._id }, process.env.SECRET_KEY);
+                        console.log(token)
                         res.cookie('token',token)
                         res.redirect('/admin/dashboard')
                     }else{

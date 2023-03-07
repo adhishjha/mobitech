@@ -1,7 +1,8 @@
 const express = require('express')
 const web = require('./routes/web')
 const app = express()
-const port = 3500
+require('dotenv').config()
+const port = process.env.PORT
 const connectionDB = require('./db/connectdb')
 const cloudinary = require('cloudinary')
 const fileUpload = require('express-fileupload')
@@ -10,8 +11,11 @@ const flash = require('connect-flash')
 const cookieParser = require('cookie-parser')
 
 
+
+
 //database connection
 connectionDB()
+
 
 //use for get the token from browser
 app.use(cookieParser())
@@ -58,5 +62,5 @@ app.use(express.static('public'))
 
 //create server
 app.listen(port,()=>{
-    console.log("Server started, localhost:3500")
+    console.log("Server started")
 })

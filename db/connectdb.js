@@ -1,12 +1,15 @@
 const mongoose = require('mongoose')
 
-
 const connectDB=async()=>{
     try{
-        await mongoose.connect('mongodb://127.0.0.1:27017/blogpractice')
+        await mongoose.connect(process.env.DB,{
+            useNewUrlParser: true,
+            useUnifiedTopology: true
+        })
         console.log("Database connected...")
     }
-    catch{
+    catch(error){
+        console.log(error)
         console.log("database not connected")
     }
 }
