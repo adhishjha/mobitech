@@ -1,7 +1,7 @@
 const express = require('express')
 const web = require('./routes/web')
 const app = express()
-const PORT = process.env.PORT || 3500
+const port = 3500
 const connectionDB = require('./db/connectdb')
 const cloudinary = require('cloudinary')
 const fileUpload = require('express-fileupload')
@@ -57,6 +57,6 @@ app.use(express.static('public'))
 
 
 //create server
-app.listen(PORT,()=>{
+app.listen(port,()=>{
     console.log("Server started, localhost:3500")
 })
