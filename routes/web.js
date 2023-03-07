@@ -19,7 +19,7 @@ router.get('/contact',FrontController.contact)
 router.get('/blog',FrontController.blog)
 router.get('/blog-detail/:id',FrontController.blogDetail)
 router.get('/login',FrontController.login)
-router.get('/register',FrontController.register)
+// router.get('/register',FrontController.register)
 router.get('/category/:categoryname',FrontController.category)
 
 

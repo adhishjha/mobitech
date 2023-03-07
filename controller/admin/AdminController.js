@@ -16,7 +16,6 @@ class AdminController{
     }
 
     static register = async (req, res) =>{
-        // console.log(req.body)
 
         try{
             const {name,email,password,confirmpassword} = req.body
@@ -70,7 +69,6 @@ class AdminController{
                     if(ismatched){
                         //token generate
                         const token = jwt.sign({ id: admin._id }, process.env.SECRET_KEY);
-                        console.log(token)
                         res.cookie('token',token)
                         res.redirect('/admin/dashboard')
                     }else{

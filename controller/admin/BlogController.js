@@ -4,12 +4,6 @@ const CategoryModel = require('../../models/Category')
 const cloudinary = require('cloudinary').v2;
 
 
-cloudinary.config({ 
-    cloud_name: 'dwrql52ck', 
-    api_key: '818917953996935', 
-    api_secret: 'suT3oYcR4GA82czatTtjhbL3dMc',
-    // secure: true
-  });
 
 
 class BlogController{
@@ -19,9 +13,7 @@ class BlogController{
             try{
                 const data = await BlogModel.find()
                 const category = await CategoryModel.find()
-                // console.log(category)
-                // console.log(data)
-                res.render('admin/blog/blog-list',{d:data, c:category})
+                res.render('admin/blog/blog-list',{d:data, c:category, message:req.flash('success'), message1:req.flash('error')})
             }
             catch(error){
                 console.log(error)
@@ -32,12 +24,17 @@ class BlogController{
 
         static blogInsert= async (req, res)=>{
             try{
-                // console.log(req.files.image)
-                const file = req.files.image
+
+                const image = req.files
+                const {title,category,description} = req.body
+
+                if(image && title && category && description){
+
+                    const file = req.files.image
                 const myimage = await cloudinary.uploader.upload(file.tempFilePath,{
-                    folder: 'blogPracticeImage'
+                    folder: 'mobitechImages'
                 })
-                // console.log(myimage)
+
                 const result = new BlogModel({
                     title: req.body.title,
                     category: req.body.category,
@@ -49,7 +46,13 @@ class BlogController{
                 })
 
                 await result.save()
+                req.flash('success','Blog added successfully!')
                 res.redirect('/admin/blogdisplay')
+
+                }else{
+                    req.flash('error','Blog is not added, all fields are required to add a blog')
+                    res.redirect('/admin/blogdisplay')
+                }
 
                 
             }
@@ -62,9 +65,8 @@ class BlogController{
         static blogView = async (req, res)=>{
 
             try{
-                // console.log(req.params.id)
+
                 const result = await BlogModel.findById(req.params.id)
-                // console.log(result)
                 res.render('admin/blog/blog-view',{view:result})
             }
             catch(error){
@@ -75,12 +77,12 @@ class BlogController{
 
         static blogDelete = async (req, res)=>{
             try{
-                // console.log(req.params.id)
+
                 const blogimage = await BlogModel.findById(req.params.id)
                 const imageid = blogimage.image.public_id
-                // console.log(imageid)
                 await cloudinary.uploader.destroy(imageid)
                 await BlogModel.findByIdAndDelete(req.params.id)
+                req.flash('success','Blog deleted successfully!')
                 res.redirect('/admin/blogdisplay')
             }
             catch(error){
@@ -91,7 +93,7 @@ class BlogController{
 
         static blogEdit = async (req, res)=>{
             try{
-                // console.log(req.params.id)
+
                 const allcategory = await CategoryModel.find()
                 const data = await BlogModel.findById(req.params.id)
                 const select = "selected"
@@ -117,7 +119,7 @@ class BlogController{
                 //second update image
                 const file = req.files.image
                 const myimage = await cloudinary.uploader.upload(file.tempFilePath,{
-                    folder: 'blogPracticeImage'
+                    folder: 'mobitechImages'
                 })
     
                 const update = await BlogModel.findByIdAndUpdate(req.params.id,{
@@ -132,6 +134,7 @@ class BlogController{
                 })
     
                 await update.save()
+                req.flash('success','Blog updated successfully!')
                 res.redirect('/admin/blogdisplay')
                 }
                 else{
@@ -144,6 +147,7 @@ class BlogController{
                     })
         
                     await update.save()
+                    req.flash('success','Blog updated successfully!')
                     res.redirect('/admin/blogdisplay')
                 }
             }

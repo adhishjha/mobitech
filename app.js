@@ -4,7 +4,7 @@ const app = express()
 require('dotenv').config()
 const port = process.env.PORT
 const connectionDB = require('./db/connectdb')
-const cloudinary = require('cloudinary')
+const cloudinary = require('cloudinary').v2
 const fileUpload = require('express-fileupload')
 const session = require('express-session')
 const flash = require('connect-flash')
@@ -15,6 +15,15 @@ const cookieParser = require('cookie-parser')
 
 //database connection
 connectionDB()
+
+
+//cloudinary config
+cloudinary.config({ 
+  cloud_name: process.env.CLOUDINARY_NAME, 
+  api_key: process.env.CLOUDINARY_API_KEY, 
+  api_secret: process.env.CLOUDINARY_API_SECRET,
+  secure: true
+});
 
 
 //use for get the token from browser
@@ -56,7 +65,9 @@ app.use(express.static('public'))
 
 
 
-
+app.get('*', (req, res)=>{
+  res.render('404')
+})
 
 
 

@@ -16,11 +16,21 @@
               </button>
           </div>
       </div>
+      <% if(message.length > 0){ %>
+        <div class="alert alert-success">
+            <%= message %>
+        </div>
+      <% } %>
+      <% if(message1.length > 0){ %>
+        <div class="alert alert-danger">
+            <%= message1 %>
+        </div>
+      <% } %>
       <div>
           <table class="table table-bordered">
               <thead class="table-light">
                   <tr>
-                      <th scope="col">#ID</th>
+                      <th scope="col">S.no</th>
                       <th scope="col">Title</th>
                       <th scope="col">Description</th>
                       <th scope="col">Category</th>
@@ -29,23 +39,28 @@
                   </tr>
               </thead>
               <tbody>
+                <% i= 1 %>
+
                 <%  d.forEach((item)=>{  %>
                       <tr>
-                          <th scope="row"><%= item._id %></th>
+                          <th scope="row"><%= i++ %></th>
                           <td><%= item.title %></td>
                           <td><%= item.description.slice(0,150) %></td>
                           <td><%= item.category %></td>
                           <td><img src="<%= item.image.url %>" width="50px" alt=""></td>
                           <td class="space-x-3">
-                              <a href="/admin/blogview/<%= item._id %>" class="text-decoration-none text-black">
-                                  <i class="fa-solid fa-eye"></i>
-                              </a>
-                              <a href="/admin/blogedit/<%= item._id %>" class="text-decoration-none text-warning">
-                                  <i class="fa-solid fa-pen-to-square"></i>
-                              </a>
-                              <a href="/admin/blogdelete/<%= item._id %>" class="text-decoration-none text-danger">
+                              <div class="d-flex flex-column align-items-center">
+
+                                  <a href="/admin/blogview/<%= item._id %>" class="text-decoration-none text-black mb-2">
+                                    <i class="fa-solid fa-eye"></i>
+                                  </a>
+                                  <a href="/admin/blogedit/<%= item._id %>" class="text-decoration-none text-warning">
+                                    <i class="fa-solid fa-pen-to-square mb-3"></i>
+                                  </a>
+                                  <a href="/admin/blogdelete/<%= item._id %>" class="text-decoration-none text-danger">
                                   <i class="fa-solid fa-trash-can"></i>
-                              </a>
+                                  </a>
+                              </div>
                           </td>
                       </tr>
                <%   })  %>

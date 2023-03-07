@@ -2,7 +2,6 @@ const mongoose = require('mongoose')
 
 
 
-//blog schema
 const BlogSchema = new mongoose.Schema({
     title:{
         type: String,

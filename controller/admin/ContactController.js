@@ -16,10 +16,13 @@ class ContactController{
             })
 
             await insert.save()
+            req.flash('success','Thanks for contacting us! We will be in touch with you shortly.')
             res.redirect('/contact')
 
         }
         catch(error){
+            req.flash('error','Please fill in all contact details')
+            res.redirect('/contact')
             console.log(error)
         }
     }
@@ -29,7 +32,6 @@ class ContactController{
     static contactDisplay = async (req, res)=>{
         try{
             const display = await ContactModel.find()
-            // console.log(display)
             res.render('admin/contact/contact-list',{d:display})
         }
         catch(error){

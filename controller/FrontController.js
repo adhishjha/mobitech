@@ -9,7 +9,6 @@ class FrontController{
         
         try{
             const blogs = await BlogModel.find().sort({_id:-1}).limit(6)
-            // console.log(blogs)
             res.render('home',{b:blogs})
         }
         catch(error){
@@ -20,7 +19,6 @@ class FrontController{
     static about = async (req, res)=>{
         try{
             const about = await AboutModel.findOne()
-            // console.log(about)
             res.render('about',{a:about})
         }
         catch(error){
@@ -29,13 +27,12 @@ class FrontController{
     }
 
     static contact= (req, res) =>{
-        res.render('contact')
+        res.render('contact',{message:req.flash('success'), message1:req.flash('error')})
     }
 
     static blog = async (req, res) =>{
         try{
             const blogs = await BlogModel.find().sort({_id:-1})
-            // console.log(blogs)
             res.render('blog',{b:blogs})
         }
         catch(error){
@@ -63,7 +60,7 @@ class FrontController{
 
     static blogDetail = async (req, res) =>{
         try{
-            // console.log(req.params.id)
+            
             const detail = await BlogModel.findById(req.params.id)
             const recentblogs = await BlogModel.find().sort({_id:-1}).limit(6)
             const category = await CategoryModel.find()

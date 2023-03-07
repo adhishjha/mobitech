@@ -16,19 +16,30 @@
               </button>
           </div>
       </div>
+      <% if(message.length > 0){ %>
+        <div class="alert alert-success">
+          <%= message %>
+        </div>
+      <% } %>
+      <% if(message1.length > 0){ %>
+        <div class="alert alert-danger">
+          <%= message1 %>
+        </div>
+      <% } %>
       <div>
           <table class="table table-bordered">
               <thead class="table-light">
                   <tr>
-                      <th scope="col">#ID</th>
+                      <th scope="col">S.no</th>
                       <th scope="col">Category Name</th>
                       <th scope="col">Action</th>
                   </tr>
               </thead>
               <tbody>
+                <% i= 1 %>
               <%  d.forEach((item)=>{ %>
                 <tr>
-                  <th scope="row"><%= item._id %></th>
+                  <th scope="row"><%= i++ %></th>
                   <td><%= item.cat_name %></td>
                   <td class="space-x-3">
                       <a href="/admin/categoryedit/<%= item._id %>" class="text-decoration-none text-warning">
